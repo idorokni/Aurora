@@ -10,7 +10,7 @@ namespace Aurora.Server.Communication
 {
     sealed class Communicator
     {
-        private Communicator _instance;
+        private static Communicator _instance;
         private List<TcpClient> _clients;
         private TcpListener _server;
         private int SERVER_LISTEN_PORT = 1223;
@@ -23,7 +23,7 @@ namespace Aurora.Server.Communication
             _server.Start();
         }
 
-        public Communicator Instance
+        public static Communicator Instance
         {
             get
             {

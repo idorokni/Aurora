@@ -8,8 +8,8 @@ namespace Aurora.Server.Communication
 {
     sealed class Server
     {
-        private Server _instance;
-        public Server Instance
+        private static Server _instance;
+        public static Server Instance
         {
             get
             {
@@ -19,6 +19,7 @@ namespace Aurora.Server.Communication
         }
         public void RunServer()
         {
+            Task.Run(() => { _ = Communicator.Instance.AcceptClients(); });
             var code = Console.ReadLine();
             while(code is not "EXIT")
             {
