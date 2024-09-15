@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Aurora.Client.WpfApplication.MVVM.View.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Aurora.Client.WpfApplication.MVVM.View"
+             xmlns:userControls="clr-namespace:Aurora.Client.WpfApplication.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Foreground="#FFFFFF"
+                   Text="Login to aurora!"
+                   VerticalAlignment="Center"
+                   FontSize="50"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="20"/>
+        <Button Grid.Row="2"
+                Height="50"
+                Width="200"
+                Style="{DynamicResource SubmitButtonTheme}"
+                Background="#F5F9FF"
+                BorderThickness="0">
+            <TextBlock Foreground="Black"
+                       Text="Submit"
+                       FontSize="30"
+                       FontWeight="Bold"/>
+        </Button>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <userControls:ClearableTextBox Grid.Row="1"
+                                           PlaceHolder="Password"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Height="60"
+                                           Width="500"
+                                           Margin="20,0,0,0"/>
+            <userControls:ClearableTextBox Grid.Row="0"
+                                           PlaceHolder="Username"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Height="60"
+                                           Width="500"
+                                           Margin="20,0,0,0"/>
+        </Grid>
+    </Grid>
+</UserControl>

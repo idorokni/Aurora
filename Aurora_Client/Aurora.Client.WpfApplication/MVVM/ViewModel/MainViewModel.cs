@@ -5,13 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using Aurora.Client.Communication;
+using Aurora.Client.WpfApplication.Core;
 
 namespace Aurora.Client.WpfApplication.MVVM.ViewModel
 {
-    internal class MainViewModel
+    internal class MainViewModel : ObservableObject
     {
+        private object? _currentView;
+        public object? CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
+        }
         public MainViewModel()
         {
+            CurrentView = new LoginViewModel();
         }
     }
 }

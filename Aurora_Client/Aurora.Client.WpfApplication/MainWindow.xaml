@@ -22,6 +22,11 @@
                 <RowDefinition Height="0.18*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+
+            <ContentControl Grid.Row="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
+
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.13*"/>
@@ -31,55 +36,6 @@
                         BorderThickness="0">
                     <Image Source="Images/white_logo.png" Width="60"/>
                 </Button>
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="0.3*"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0"
-                           Foreground="#FFFFFF"
-                           Text="Login to aurora!"
-                           VerticalAlignment="Center"
-                           FontSize="50"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"
-                           Margin="20"/>
-                <Button Grid.Row="2"
-                        Height="50"
-                        Width="200"
-                        Style="{DynamicResource SubmitButtonTheme}"
-                        Background="#F5F9FF"
-                        BorderThickness="0">
-                    <TextBlock Foreground="Black"
-                               Text="Submit"
-                               FontSize="30"
-                               FontWeight="Bold"/>
-                </Button>
-
-                <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <userControls:ClearableTextBox Grid.Row="1"
-                                                   PlaceHolder="Password"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Height="60"
-                                                   Width="500"
-                                                   Margin="20,0,0,0"/>
-                    <userControls:ClearableTextBox Grid.Row="0"
-                                                   PlaceHolder="Username"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Height="60"
-                                                   Width="500"
-                                                   Margin="20,0,0,0"/>
-                </Grid>
             </Grid>
         </Grid>
     </Border>
