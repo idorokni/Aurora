@@ -12,7 +12,6 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
     {
         public MainViewModel()
         {
-            Communicator.Instance.ConnectToServerAsync();
         }
     }
 }
