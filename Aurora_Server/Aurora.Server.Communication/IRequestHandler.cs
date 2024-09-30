@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Aurora.Server.Communication
 {
-    interface IRequestHandler
+    public interface IRequestHandler
     {
-        bool IsRequestValid(RequestInfo info);
-        Task<IRequestHandler> HandleRequest(RequestInfo info);
+        public bool IsRequestValid(RequestInfo info);
+        public Task<IRequestHandler> HandleRequest(RequestInfo info);
     }
 }

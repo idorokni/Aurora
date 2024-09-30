@@ -19,6 +19,6 @@ namespace Aurora.Server.Communication
             }
         }
 
-        public JWTLoginRequestHandler GetJWTLoginManager() => new JWTLoginRequestHandler();
+        public JWTLoginRequestHandler GetJWTRequestHandler() => new JWTLoginRequestHandler();
     }
 }

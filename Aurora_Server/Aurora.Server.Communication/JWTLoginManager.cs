@@ -6,15 +6,31 @@ using System.Threading.Tasks;
 
 namespace Aurora.Server.Communication
 {
-    internal class JWTLoginManager
+    public class JWTLoginManager
     {
-        bool JWTsignup(string username, string password)
-        {
-
+        private static JWTLoginManager _instance;
+        public static JWTLoginManager Instance { 
+            get
+            {
+                _instance ??= new JWTLoginManager();
+                return _instance;
+            }
         }
-        bool JWTlogin(string username, string password)
+        public async Task<bool> JWTsignupAsync(string username, string password)
         {
-            return true;
+            try
+            {
+                await JWTService.GenerateTokenAsync(username, password);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> JWTloginAsync(string token)
+        {
+            return await JWTService.ValidateTokenAsync(token);
         }
     }
 }
