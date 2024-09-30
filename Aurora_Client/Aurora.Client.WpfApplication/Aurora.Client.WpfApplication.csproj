@@ -9,19 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Fonts\**" />
     <Compile Remove="MVVM\Model\**" />
+    <EmbeddedResource Remove="Fonts\**" />
     <EmbeddedResource Remove="MVVM\Model\**" />
+    <None Remove="Fonts\**" />
     <None Remove="MVVM\Model\**" />
+    <Page Remove="Fonts\**" />
     <Page Remove="MVVM\Model\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Images\refresh.png" />
     <None Remove="Images\white_logo.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Fonts\" />
   </ItemGroup>
 
   <ItemGroup>

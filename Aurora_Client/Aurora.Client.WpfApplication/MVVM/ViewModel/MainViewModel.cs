@@ -11,8 +11,8 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
-        private object? _currentView;
-        public object? CurrentView
+        private object _currentView = null!;
+        public object CurrentView
         {
             get { return _currentView; }
             set
@@ -24,6 +24,7 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
         public MainViewModel()
         {
             CurrentView = new LoginViewModel();
+            Communicator.Instance.ConnectToServerAsync();
         }
     }
 }
