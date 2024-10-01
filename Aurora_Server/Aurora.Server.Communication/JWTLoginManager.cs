@@ -16,16 +16,15 @@ namespace Aurora.Server.Communication
                 return _instance;
             }
         }
-        public async Task<bool> JWTsignupAsync(string username, string password)
+        public async Task<string?> JWTsignupAsync(string username, string password)
         {
             try
             {
-                await JWTService.GenerateTokenAsync(username, password);
-                return true;
+                return await JWTService.GenerateTokenAsync(username, password);
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
         public async Task<bool> JWTloginAsync(string token)

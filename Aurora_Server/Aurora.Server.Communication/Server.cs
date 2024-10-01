@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Aurora.Server.Database;
 
 namespace Aurora.Server.Communication
 {
@@ -20,7 +19,7 @@ namespace Aurora.Server.Communication
         }
         public void RunServer()
         {
-            Task.Run(() => { _ = Communicator.Instance.AcceptClients(); });
+            Task.Run(() => { Communicator.Instance.AcceptClients(); });
             var code = Console.ReadLine();
             while(code is not "EXIT")
             {

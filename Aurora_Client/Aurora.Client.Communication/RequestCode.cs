@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aurora.Server.Communication
+namespace Aurora.Client.Communication
 {
     public enum RequestCode : byte
     {

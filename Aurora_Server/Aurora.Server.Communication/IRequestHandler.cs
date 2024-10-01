@@ -9,6 +9,6 @@ namespace Aurora.Server.Communication
     public interface IRequestHandler
     {
         public bool IsRequestValid(RequestInfo info);
-        public Task<IRequestHandler> HandleRequest(RequestInfo info);
+        public Task<(IRequestHandler, RequestResult)> HandleRequest(RequestInfo info);
     }
 }

@@ -36,11 +36,11 @@ namespace Aurora.Server.Communication
             }
         }
 
-        public async Task AcceptClients()
+        public void AcceptClients()
         {
             while (true)
             {
-                _clients.Add(_server.AcceptTcpClient(), RequestHandlerFactory.Instance.GetJWTLoginManager());
+                _clients.Add(_server.AcceptTcpClient(), RequestHandlerFactory.Instance.GetJWTRequestHandler());
                 _ = Task.Run(() => { _ = HandleClientAsync(_clients.Last().Key, _clients.Last().Value); });
             }
         }
@@ -52,21 +52,32 @@ namespace Aurora.Server.Communication
             var length = BitConverter.ToInt32(header, CODE_AMOUNT_BYTES);
             var wholeMessage = new byte[length + HEADER_SIZE];
             Array.Copy(header, wholeMessage, HEADER_SIZE);
-            await stream.ReadAsync(wholeMessage, 0, length);
+            await stream.ReadAsync(wholeMessage, HEADER_SIZE, length);
             RequestInfo info;
             info.code = (RequestCode)wholeMessage[0];
             info.data = Encoding.UTF8.GetString(wholeMessage, HEADER_SIZE, wholeMessage.Length - HEADER_SIZE);
             return info;
         }
 
+        private async Task SendMessage(NetworkStream stream, RequestResult result)
+        {
+            var wholeMessage = new byte[HEADER_SIZE + result.message.Length];
+            wholeMessage[0] = (byte)result.code;
+            Array.Copy(wholeMessage, 1, BitConverter.GetBytes(result.message.Length), 0, 4);
+            Array.Copy(wholeMessage, HEADER_SIZE, Encoding.UTF8.GetBytes(result.message), 0, result.message.Length);
+            await stream.WriteAsync(wholeMessage);
+        }
+
         private async Task HandleClientAsync(TcpClient client, IRequestHandler handler)
         {
             while (true)
             {
+                RequestResult result;
                 RequestInfo info = await ReadMessage(client.GetStream());
                 if (handler.IsRequestValid(info))
                 {
-                    handler = await handler.HandleRequest(info);
+                    (handler, result) = await handler.HandleRequest(info);
+                    await SendMessage(client.GetStream(), result);
                 }
                 else
                 {
