@@ -13,9 +13,9 @@ namespace Aurora.Server.Communication
         {
             return info.code == RequestCode.LOGIN_REQUEST_CODE || info.code == RequestCode.SIGN_UP_REQUEST_CODE;
         }
-        public async Task<(IRequestHandler, RequestResult)> HandleRequest(RequestInfo info)
+        public async Task<(IRequestHandler, ResponseInfo)> HandleRequest(RequestInfo info)
         {
-            RequestResult result = new RequestResult();
+            ResponseInfo result = new ResponseInfo();
 
             switch (info.code)
             {
@@ -26,7 +26,7 @@ namespace Aurora.Server.Communication
                     string username = info.data.Split("###")[0];
                     string password = info.data.Split("###")[1];
                     result.message = await JWTLoginManager.Instance.JWTsignupAsync(username, password);
-                    result.code = result.message != null ? ResponseCode.TOKEN_SIGNUP_SUCCESS : ResponseCode.TOKEN_SIGNUP_FAILED;
+                    result.code = result.message != "" ? ResponseCode.TOKEN_SIGNUP_SUCCESS : ResponseCode.TOKEN_SIGNUP_FAILED;
                     break;
                 default:
                     break;

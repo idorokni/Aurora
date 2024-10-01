@@ -8,8 +8,8 @@ namespace Aurora.Client.Communication
 {
     internal class TokenManager
     {
-        private TokenManager _instance;
-        public TokenManager Instance
+        private static TokenManager _instance;
+        public static TokenManager Instance
         {
             get
             {

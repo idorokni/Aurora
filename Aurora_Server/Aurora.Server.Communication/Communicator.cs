@@ -59,10 +59,11 @@ namespace Aurora.Server.Communication
             return info;
         }
 
-        private async Task SendMessage(NetworkStream stream, RequestResult result)
+        private async Task SendMessage(NetworkStream stream, ResponseInfo result)
         {
             var wholeMessage = new byte[HEADER_SIZE + result.message.Length];
             wholeMessage[0] = (byte)result.code;
+            byte[] arr = BitConverter.GetBytes(result.message.Length);
             Array.Copy(wholeMessage, 1, BitConverter.GetBytes(result.message.Length), 0, 4);
             Array.Copy(wholeMessage, HEADER_SIZE, Encoding.UTF8.GetBytes(result.message), 0, result.message.Length);
             await stream.WriteAsync(wholeMessage);
@@ -72,7 +73,7 @@ namespace Aurora.Server.Communication
         {
             while (true)
             {
-                RequestResult result;
+                ResponseInfo result;
                 RequestInfo info = await ReadMessage(client.GetStream());
                 if (handler.IsRequestValid(info))
                 {

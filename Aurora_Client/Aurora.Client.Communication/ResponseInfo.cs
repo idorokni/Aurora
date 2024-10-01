@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aurora.Server.Communication
+namespace Aurora.Client.Communication
 {
-    public struct RequestResult
+    public struct ResponseInfo
     {
         public ResponseCode code;
-        public string? message;
+        public string message;
     }
 }
