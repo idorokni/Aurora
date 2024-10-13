@@ -20,8 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\email-icon.png" />
+    <None Remove="Images\key-icon.png" />
+    <None Remove="Images\lock-icon.png" />
     <None Remove="Images\refresh.png" />
+    <None Remove="Images\user-icon.png" />
     <None Remove="Images\white_logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="XamlFlair.WPF" Version="1.2.13" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +37,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\email-icon.png" />
+    <Resource Include="Images\key-icon.png" />
+    <Resource Include="Images\lock-icon.png" />
     <Resource Include="Images\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\user-icon.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\white_logo.png">

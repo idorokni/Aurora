@@ -4,56 +4,67 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Aurora.Client.WpfApplication.MVVM.View"
-             xmlns:userControls="clr-namespace:Aurora.Client.WpfApplication.UserControls"
+             xmlns:userControls="clr-namespace:Aurora.Client.WpfApplication.UserControls" xmlns:viewmodel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:xf = "clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             d:DesignHeight="500" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition/>
-            <RowDefinition Height="0.3*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Foreground="#FFFFFF"
-                   Text="Login to aurora!"
-                   VerticalAlignment="Center"
-                   FontSize="50"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Margin="20"/>
-        <Button Grid.Row="2"
-                Height="50"
-                Width="200"
-                Style="{DynamicResource SubmitButtonTheme}"
-                Background="#F5F9FF"
-                BorderThickness="0">
-            <TextBlock Foreground="Black"
-                       Text="Submit"
-                       FontSize="30"
-                       FontWeight="Bold"/>
-        </Button>
+        <Border CornerRadius="10 0 0 10" xf:Animations.Primary="{StaticResource FadeIn}">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#3AA9AD" Offset="0"/>
+                    <GradientStop Color="#3AADA1" Offset="0"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Canvas>
+                    <Polygon Points="0,20 230,140 0,270" Fill="#4EB1B6"/>
+                    <Polygon Points="320,480 130,370 320,250" Fill="#4EB1B6"/>
+                </Canvas>
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <userControls:ClearableTextBox Grid.Row="1"
-                                           PlaceHolder="Password"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Height="60"
-                                           Width="500"
-                                           Margin="20,0,0,0"/>
-            <userControls:ClearableTextBox Grid.Row="0"
-                                           PlaceHolder="Username"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Height="60"
-                                           Width="500"
-                                           Margin="20,0,0,0"/>
-        </Grid>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Sign up to Aurora" Style="{StaticResource loginTitleText}"/>
+                    <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource normalLoginText}" Opacity="0.8" Margin="20 30"/>
+                    <Button Content="Sign up" Style="{StaticResource signupButton}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Background="White" Grid.Column="1" CornerRadius="0 10 10 0" xf:Animations.Primary="{StaticResource FadeIn}">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Sign in to Aurora" Style="{StaticResource loginTitleText}" Foreground="#3AB19B"/>
+                <TextBlock Text="Please use your account info : " Style="{StaticResource normalLoginText}" Foreground="#878787" Margin="0 10 0 15"/>
+                <Border BorderThickness="1" BorderBrush="#ACB0AF" Margin="70 0" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Images/email-icon.png" Height="20" Grid.Column="0"/>
+                        <TextBlock x:Name="textEmail" Text="Email" Style="{StaticResource txtHint}" Grid.Column="2" MouseDown="textEmail_MouseDown"/>
+                        <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Grid.Column="2" BorderThickness="0"/>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="#ACB0AF" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Images/lock-icon.png" Height="20" Grid.Column="0"/>
+                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource txtHint}" Grid.Column="2" Margin="10,0,0,0"/>
+                        <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Grid.Column="2" BorderThickness="0" Margin="10, 0, 0, 0"/>
+                    </Grid>
+                </Border>
+                <Button Content="Sign in" Style="{StaticResource loginButton}"/>
+            </StackPanel>
+        </Border>
     </Grid>
+    
 </UserControl>

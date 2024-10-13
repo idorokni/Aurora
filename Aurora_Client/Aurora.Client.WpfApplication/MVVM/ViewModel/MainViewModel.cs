@@ -11,7 +11,7 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
-        private object _currentView = null!;
+        private object _currentView;
         public object CurrentView
         {
             get { return _currentView; }

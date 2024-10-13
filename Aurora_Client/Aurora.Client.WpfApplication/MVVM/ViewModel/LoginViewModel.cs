@@ -1,14 +1,31 @@
 ﻿using Aurora.Client.WpfApplication.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aurora.Client.WpfApplication.MVVM.ViewModel
 {
     internal class LoginViewModel : ObservableObject
     {
+        private string _email = string.Empty;
+        private string _password = string.Empty;
 
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

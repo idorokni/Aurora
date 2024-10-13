@@ -17,7 +17,8 @@
                  Background="Transparent"
                  Style="{DynamicResource LoginSignUpInputBoxTheme}"
                  TextAlignment="Left"
-                 Padding="20,0,0,0"/>
+                 Padding="20,0,0,0"
+                 Text="{Binding Text, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock x:Name="tbPlaceHolder"
                    Text="{Binding PlaceHolder, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
                    FontSize="30"

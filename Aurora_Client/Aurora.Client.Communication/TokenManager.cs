@@ -17,18 +17,22 @@ namespace Aurora.Client.Communication
                 return _instance;
             }
         }
-        private static readonly string TokenFilePath = "token.dat";
+        private static readonly string tokenFilePath = "token.dat";
 
         public async Task SaveTokenToFileAsync(string decryptedToken)
         {
-            var encryptedToken = await TokenEncryptionManager.Instance.EncryptTokenToFileAsync(decryptedToken);
-            await File.WriteAllTextAsync(TokenFilePath, encryptedToken);
+            var encryptedToken = TokenEncryptionManager.Instance.EncryptTokenToFileAsync(decryptedToken);
+            if (!File.Exists(tokenFilePath))
+            {
+                File.Create(tokenFilePath);
+            }
+            await File.WriteAllTextAsync(tokenFilePath, encryptedToken);
         }
 
         public async Task<string> LoadTokenFromFile()
         {
-            var encryptedToken = await File.ReadAllTextAsync(TokenFilePath);
-            return await TokenEncryptionManager.Instance.DecryptTokenToFileAsync(encryptedToken);
+            var encryptedToken = await File.ReadAllTextAsync(tokenFilePath);
+            return TokenEncryptionManager.Instance.DecryptTokenToFileAsync(encryptedToken);
         }
     }
 }

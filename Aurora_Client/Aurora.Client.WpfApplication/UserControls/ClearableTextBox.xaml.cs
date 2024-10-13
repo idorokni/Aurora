@@ -27,11 +27,17 @@ namespace Aurora.Client.WpfApplication.UserControls
         }
 
         private string _placeHolder;
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(nameof(Text), typeof(string), typeof(ClearableTextBox), new PropertyMetadata(string.Empty));
 
         public event PropertyChangedEventHandler?  PropertyChanged;
 
         public string PlaceHolder { get { return _placeHolder; } set { _placeHolder = value; OnPropertyChanged(nameof(PlaceHolder)); } }
-
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); OnPropertyChanged(nameof(Text)); }
+        }
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

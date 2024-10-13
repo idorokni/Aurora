@@ -7,36 +7,14 @@
         xmlns:viewModel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel"
         xmlns:userControls="clr-namespace:Aurora.Client.WpfApplication.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
         WindowStyle="None"
         ResizeMode="CanResize"
         Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         AllowsTransparency="True">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-
-    <Border Background="#0E0F0F" CornerRadius="30">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.18*"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <ContentControl Grid.Row="1"
-                            Margin="10"
-                            Content="{Binding CurrentView}"/>
-
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.13*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Background="Transparent"
-                        BorderThickness="0">
-                    <Image Source="Images/white_logo.png" Width="60"/>
-                </Button>
-            </Grid>
-        </Grid>
-    </Border>
+    <ContentControl Content="{Binding CurrentView}"/>
 </Window>

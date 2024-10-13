@@ -18,24 +18,16 @@ namespace Aurora.Client.Communication
             }
         }
 
-        public async Task<string> EncryptTokenToFileAsync(string decryptedToken)
+        public string EncryptTokenToFileAsync(string decryptedToken)
         {
-            await Task.Run(() =>
-            {
-                var tokenBytes = Encoding.UTF8.GetBytes(decryptedToken);
-                return Convert.ToBase64String(tokenBytes);
-            });
-            return decryptedToken;
+            var tokenBytes = Encoding.UTF8.GetBytes(decryptedToken);
+            return Convert.ToBase64String(tokenBytes);
         }
 
-        public async Task<string> DecryptTokenToFileAsync(string encryptedToken)
+        public string DecryptTokenToFileAsync(string encryptedToken)
         {
-            await Task.Run(() =>
-            {
-                var encryptedBytes = Convert.FromBase64String(encryptedToken);
-                return Encoding.UTF8.GetString(encryptedBytes);
-            });
-            return encryptedToken;
+            var encryptedBytes = Convert.FromBase64String(encryptedToken);
+            return Encoding.UTF8.GetString(encryptedBytes);
         }
     }
 }

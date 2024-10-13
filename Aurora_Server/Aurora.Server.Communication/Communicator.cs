@@ -64,8 +64,8 @@ namespace Aurora.Server.Communication
             var wholeMessage = new byte[HEADER_SIZE + result.message.Length];
             wholeMessage[0] = (byte)result.code;
             byte[] arr = BitConverter.GetBytes(result.message.Length);
-            Array.Copy(wholeMessage, 1, BitConverter.GetBytes(result.message.Length), 0, 4);
-            Array.Copy(wholeMessage, HEADER_SIZE, Encoding.UTF8.GetBytes(result.message), 0, result.message.Length);
+            Array.Copy(arr, 0, wholeMessage, 1, 4);
+            Array.Copy(Encoding.UTF8.GetBytes(result.message), 0, wholeMessage, HEADER_SIZE, result.message.Length);
             await stream.WriteAsync(wholeMessage);
         }
 

@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Aurora.Client.WpfApplication"
              xmlns:view="clr-namespace:Aurora.Client.WpfApplication.MVVM.View"
              xmlns:viewModel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel"
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,8 +14,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/SubmitButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/LoginSignUpInputBoxTheme.xaml"/>
-
-
+                <ResourceDictionary Source="Theme/LoginTitleText.xaml"/>
+                <xf:XamlFlairResources/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
