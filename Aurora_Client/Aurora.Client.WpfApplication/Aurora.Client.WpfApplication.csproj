@@ -43,9 +43,7 @@
     <Resource Include="Images\refresh.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\user-icon.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\user-icon.png" />
     <Resource Include="Images\white_logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

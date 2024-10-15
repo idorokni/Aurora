@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Aurora.Client.WpfApplication.MVVM.View"
-             xmlns:userControls="clr-namespace:Aurora.Client.WpfApplication.UserControls" xmlns:viewmodel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              mc:Ignorable="d" 
-             xmlns:xf = "clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             xmlns:xf = "clr-namespace:XamlFlair;assembly=XamlFlair.WPF" 
+             xmlns:viewmodel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,7 +15,7 @@
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="10 0 0 10" xf:Animations.Primary="{StaticResource FadeIn}">
+        <Border CornerRadius="10 0 0 10" xf:Animations.Primary="{StaticResource FadeInAndSlideFromLeft}">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#3AA9AD" Offset="0"/>
@@ -30,11 +31,11 @@
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Sign up to Aurora" Style="{StaticResource loginTitleText}"/>
                     <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource normalLoginText}" Opacity="0.8" Margin="20 30"/>
-                    <Button Content="Sign up" Style="{StaticResource signupButton}"/>
+                    <Button Content="Sign up" Style="{StaticResource signupButton}" Command="{Binding SwitchToSignup}"/>
                 </StackPanel>
             </Grid>
         </Border>
-        <Border Background="White" Grid.Column="1" CornerRadius="0 10 10 0" xf:Animations.Primary="{StaticResource FadeIn}">
+        <Border Background="White" Grid.Column="1" CornerRadius="0 10 10 0" xf:Animations.Primary="{StaticResource FadeInAndSlideFromLeft}">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Sign in to Aurora" Style="{StaticResource loginTitleText}" Foreground="#3AB19B"/>
                 <TextBlock Text="Please use your account info : " Style="{StaticResource normalLoginText}" Foreground="#878787" Margin="0 10 0 15"/>
@@ -45,9 +46,9 @@
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="/Images/email-icon.png" Height="20" Grid.Column="0"/>
-                        <TextBlock x:Name="textEmail" Text="Email" Style="{StaticResource txtHint}" Grid.Column="2" MouseDown="textEmail_MouseDown"/>
-                        <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged" Grid.Column="2" BorderThickness="0"/>
+                        <Image Source="/Images/user-icon.png" Height="20" Grid.Column="0"/>
+                        <TextBlock x:Name="textUsername" Text="Username" Style="{StaticResource txtHint}" Grid.Column="2" MouseDown="textUsername_MouseDown"/>
+                        <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" Grid.Column="2" BorderThickness="0"/>
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="#ACB0AF" Margin="70 7" CornerRadius="5">

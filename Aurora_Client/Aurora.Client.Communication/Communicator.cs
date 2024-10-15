@@ -21,6 +21,7 @@ namespace Aurora.Client.Communication
             get
             {
                 _instance ??= new Communicator();
+                _instance.ConnectToServerAsync();
                 return _instance;
             }
         }
@@ -30,7 +31,7 @@ namespace Aurora.Client.Communication
             _client = new TcpClient();
         }
 
-        private async Task SendMessageToServer(RequestInfo info)
+        public async Task SendMessageToServer(RequestInfo info)
         {
             var wholeMessage = new byte[HEADER_SIZE + info.message.Length];
             wholeMessage[0] = (byte)info.code;
@@ -39,7 +40,7 @@ namespace Aurora.Client.Communication
             await _client.GetStream().WriteAsync(wholeMessage);
         }
 
-        private async Task<ResponseInfo> ReadMessageFromServer()
+        public async Task<ResponseInfo> ReadMessageFromServer()
         {
             var stream = _client.GetStream();
             var headerMessage = new byte[HEADER_SIZE];
@@ -61,12 +62,6 @@ namespace Aurora.Client.Communication
             try
             {
                 await _client.ConnectAsync(CONNECTION_IP, CONNECTION_PORT);
-                RequestInfo requestInfo;
-                requestInfo.code = RequestCode.SIGN_UP_REQUEST_CODE;
-                requestInfo.message = "dodido###123456";
-                await SendMessageToServer(requestInfo);
-                ResponseInfo info = await ReadMessageFromServer();
-                await TokenManager.Instance.SaveTokenToFileAsync(info.message);
             }
             catch (Exception ex)
             {

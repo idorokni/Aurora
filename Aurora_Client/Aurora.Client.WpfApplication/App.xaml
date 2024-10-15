@@ -8,8 +8,18 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <xf:AnimationSettings x:Key="FadeInAndSlideFromLeft"
+                          Kind="FadeFrom,TranslateXFrom"
+                          Opacity="0"
+                          Duration="600"/>
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
                 <view:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SignupViewModel}">
+                <view:SignupView/>
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/SubmitButtonTheme.xaml"/>

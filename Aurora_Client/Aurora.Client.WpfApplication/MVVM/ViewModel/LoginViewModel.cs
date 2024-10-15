@@ -8,6 +8,16 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
         private string _email = string.Empty;
         private string _password = string.Empty;
 
+        public RelayCommand SwitchToSignup {  get; set; }
+
+        public LoginViewModel()
+        {
+            SwitchToSignup = new RelayCommand(o =>
+            {
+                MainViewModel.Instance.CurrentView = new SignupViewModel();
+            });
+        }
+
         public string Password
         {
             get => _password;

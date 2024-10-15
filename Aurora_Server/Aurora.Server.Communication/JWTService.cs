@@ -15,7 +15,7 @@ namespace Aurora.Server.Communication
         private static readonly string _issuer = "localhost";
         private static readonly string _audience;
 
-        public static async Task<string> GenerateTokenAsync(string username, string password)
+        public static async Task<string> GenerateTokenAsync(string username, string password, string email)
         {
             return await Task.Run(() =>
             {
@@ -26,8 +26,10 @@ namespace Aurora.Server.Communication
                 {
                     Subject = new ClaimsIdentity(new[]
                     {
-                    new Claim(ClaimTypes.Name, username, password)
-                }),
+                        new Claim("username", username),
+                        new Claim("email", email),
+                        new Claim("password", password)  // Custom claim for password if necessary
+                    }),
                     Expires = DateTime.UtcNow.AddHours(1),  // Set token expiration
                     Issuer = _issuer,
                     Audience = _audience,
@@ -38,6 +40,7 @@ namespace Aurora.Server.Communication
                 return tokenHandler.WriteToken(token);
             });
         }
+
 
         public static async Task<bool> ValidateTokenAsync(string token)
         {

@@ -23,9 +23,10 @@ namespace Aurora.Server.Communication
                     await JWTLoginManager.Instance.JWTloginAsync(info.data);
                     break;
                 case RequestCode.SIGN_UP_REQUEST_CODE:
-                    string username = info.data.Split("###")[0];
-                    string password = info.data.Split("###")[1];
-                    result.message = await JWTLoginManager.Instance.JWTsignupAsync(username, password);
+                    string username = info.data.Split("@")[0];
+                    string password = info.data.Split("@")[1];
+                    string email = info.data.Split("@")[2];
+                    result.message = await JWTLoginManager.Instance.JWTsignupAsync(username, password, email);
                     result.code = result.message != "" ? ResponseCode.TOKEN_SIGNUP_SUCCESS : ResponseCode.TOKEN_SIGNUP_FAILED;
                     break;
                 default:

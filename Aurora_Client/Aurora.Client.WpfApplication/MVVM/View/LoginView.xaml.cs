@@ -25,20 +25,20 @@ namespace Aurora.Client.WpfApplication.MVVM.View
             InitializeComponent();
         }
 
-        private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
+        private void textUsername_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtEmail.Focus(); 
+            txtUsername.Focus(); 
         }
 
-        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
+            if(!string.IsNullOrEmpty(txtUsername.Text) && txtUsername.Text.Length > 0)
             {
-                textEmail.Visibility = Visibility.Collapsed;
+                textUsername.Visibility = Visibility.Collapsed;
             }
             else
             {
-                textEmail.Visibility = Visibility.Visible;
+                textUsername.Visibility = Visibility.Visible;
             }
         }
         
