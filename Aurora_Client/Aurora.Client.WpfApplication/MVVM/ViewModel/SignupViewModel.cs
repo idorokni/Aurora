@@ -40,7 +40,7 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
                 }
                 else
                 {
-                    MainViewModel.Instance.CurrentView = new HomeViewModel();
+                    MainViewModel.Instance.CurrentView = new HomeViewModel(new LoggedUser(_username, _email));
                 }
             }, o => _confirmPassword != string.Empty && _password != string.Empty && _confirmPassword == _password);
 

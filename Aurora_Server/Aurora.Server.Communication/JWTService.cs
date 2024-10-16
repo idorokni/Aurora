@@ -13,7 +13,7 @@ namespace Aurora.Server.Communication
     {
         private static readonly string _secretKey = "F90A311A6FEF39D337A088496969B9AC";
         private static readonly string _issuer = "localhost";
-        private static readonly string _audience;
+        private static readonly string _audience = "Aurora.Server";
 
         public static async Task<string> GenerateTokenAsync(string username, string password, string email)
         {
@@ -42,7 +42,7 @@ namespace Aurora.Server.Communication
         }
 
 
-        public static async Task<bool> ValidateTokenAsync(string token)
+        public static async Task<LoggedUser> ValidateTokenAsync(string token)
         {
             return await Task.Run(() =>
             {
@@ -62,11 +62,21 @@ namespace Aurora.Server.Communication
                 try
                 {
                     tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
-                    return true;  // Token is valid
+                    var jwtToken = validatedToken as JwtSecurityToken;
+                    if (jwtToken != null)
+                    {
+                        var claimsList = jwtToken.Claims.ToList();
+                        var username = claimsList.Find(claim => claim.Type == "username").Value;
+                        var email = claimsList.Find(claim => claim.Type == "email").Value;
+                        var user = new LoggedUser(username, email);
+                        return user;
+                        
+                    }
+                    return null;  // Token is valid
                 }
-                catch
+                catch (Exception ex) 
                 {
-                    return false;  // Token is invalid
+                    return null;  // Token is invalid
                 }
             });
         }

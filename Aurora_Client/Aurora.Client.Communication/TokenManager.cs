@@ -22,17 +22,31 @@ namespace Aurora.Client.Communication
         public async Task SaveTokenToFileAsync(string decryptedToken)
         {
             var encryptedToken = TokenEncryptionManager.Instance.EncryptTokenToFileAsync(decryptedToken);
-            if (!File.Exists(tokenFilePath))
-            {
-                File.Create(tokenFilePath);
-            }
             await File.WriteAllTextAsync(tokenFilePath, encryptedToken);
         }
 
         public async Task<string> LoadTokenFromFile()
         {
-            var encryptedToken = await File.ReadAllTextAsync(tokenFilePath);
-            return TokenEncryptionManager.Instance.DecryptTokenToFileAsync(encryptedToken);
+            try
+            {
+                if (!IsTokenExist())
+                    return string.Empty; // Return an empty string if the token file does not exist.
+
+                var encryptedToken = await File.ReadAllTextAsync(tokenFilePath);
+                return TokenEncryptionManager.Instance.DecryptTokenToFileAsync(encryptedToken);
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception here
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                return string.Empty;
+            }
+        }
+
+
+        public bool IsTokenExist()
+        {
+            return File.Exists(tokenFilePath);
         }
     }
 }

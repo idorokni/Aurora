@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Aurora.Client.Communication
@@ -18,27 +16,60 @@ namespace Aurora.Client.Communication
             }
         }
 
-        //public async Task<string> SigninToServer(string username, string password)
-        //{
-        //    RequestInfo requestInfo;
-        //    requestInfo.message = username + "@" + password;
-        //    requestInfo.code = RequestCode.LOGIN_REQUEST_CODE;
-        //    await Communicator.Instance.SendMessageToServer(requestInfo);
-        //    ResponseInfo responseInfo = await Communicator.Instance.ReadMessageFromServer();
-        //    return responseInfo;
-        //}
-        
-        public async Task<ResponseInfo> SignupToServer(string username, string password, string email)
+        public async Task<ResponseInfo> TrySigninginToServerWithToken()
         {
-            RequestInfo requestInfo;
-            requestInfo.message = username + "@" + password + "@" + email;
-            requestInfo.code = RequestCode.SIGN_UP_REQUEST_CODE;
+            ResponseInfo responseInfo = new ResponseInfo();
+            RequestInfo requestInfo = new RequestInfo();
+
+            if (!TokenManager.Instance.IsTokenExist())
+            {
+                responseInfo.code = ResponseCode.TOKEN_CONNECT_FAILED;
+                responseInfo.message = "Cannot connect";
+                return responseInfo;
+            }
+
+            requestInfo.message = await TokenManager.Instance.LoadTokenFromFile();
+            requestInfo.code = RequestCode.CONNECT_REQUEST_CODE;
             await Communicator.Instance.SendMessageToServer(requestInfo);
-            ResponseInfo responseInfo = await Communicator.Instance.ReadMessageFromServer();
-            if(responseInfo.code == ResponseCode.TOKEN_SIGNUP_SUCCESS)
+            responseInfo = await Communicator.Instance.ReadMessageFromServer();
+            return responseInfo;
+        }
+
+        public async Task<ResponseInfo> SigninToServer(string username, string password)
+        {
+            RequestInfo requestInfo = new RequestInfo
+            {
+                message = JsonSerializer.Serialize(new {Username = username, Password = password}),
+                code = RequestCode.LOGIN_REQUEST_CODE
+            };
+
+            await Communicator.Instance.SendMessageToServer(requestInfo);
+            var responseInfo = await Communicator.Instance.ReadMessageFromServer();
+
+            if (responseInfo.code == ResponseCode.TOKEN_LOGIN_SUCCESS)
             {
                 await TokenManager.Instance.SaveTokenToFileAsync(responseInfo.message);
             }
+
+            return responseInfo;
+        }
+
+        public async Task<ResponseInfo> SignupToServer(string username, string password, string email)
+        {
+            RequestInfo requestInfo = new RequestInfo
+            {
+                message = JsonSerializer.Serialize(new { Username = username, Password = password, Email = email }),
+                code = RequestCode.SIGN_UP_REQUEST_CODE
+            };
+
+            await Communicator.Instance.SendMessageToServer(requestInfo);
+            var responseInfo = await Communicator.Instance.ReadMessageFromServer();
+
+            if (responseInfo.code == ResponseCode.TOKEN_SIGNUP_SUCCESS)
+            {
+                await TokenManager.Instance.SaveTokenToFileAsync(responseInfo.message);
+            }
+
             return responseInfo;
         }
     }

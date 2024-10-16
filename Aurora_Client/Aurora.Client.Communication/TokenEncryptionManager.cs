@@ -20,14 +20,12 @@ namespace Aurora.Client.Communication
 
         public string EncryptTokenToFileAsync(string decryptedToken)
         {
-            var tokenBytes = Encoding.UTF8.GetBytes(decryptedToken);
-            return Convert.ToBase64String(tokenBytes);
+            return decryptedToken;
         }
 
         public string DecryptTokenToFileAsync(string encryptedToken)
         {
-            var encryptedBytes = Convert.FromBase64String(encryptedToken);
-            return Encoding.UTF8.GetString(encryptedBytes);
+            return encryptedToken;
         }
     }
 }

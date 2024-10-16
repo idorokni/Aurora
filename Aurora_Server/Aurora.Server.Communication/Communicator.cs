@@ -12,6 +12,7 @@ namespace Aurora.Server.Communication
     {
         private static Communicator _instance;
         private Dictionary<TcpClient, IRequestHandler> _clients;
+        private List<LoggedUser> _loggedUsers;
         private TcpListener _server;
 
         private int SERVER_LISTEN_PORT = 1223;

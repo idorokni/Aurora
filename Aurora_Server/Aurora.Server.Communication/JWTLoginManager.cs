@@ -16,7 +16,7 @@ namespace Aurora.Server.Communication
                 return _instance;
             }
         }
-        public async Task<string?> JWTsignupAsync(string username, string password, string email)
+        public async Task<string?> JWTSignupAndSigninAsync(string username, string password, string email)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace Aurora.Server.Communication
                 return null;
             }
         }
-        public async Task<bool> JWTloginAsync(string token)
+        public async Task<LoggedUser> JWTloginAsync(string token)
         {
             return await JWTService.ValidateTokenAsync(token);
         }

@@ -10,8 +10,11 @@ namespace Aurora.Server.Communication
     {
         public bool IsRequestValid(RequestInfo info)
         {
-
+            return true;
         }
-        public Task<(IRequestHandler, ResponseInfo)> HandleRequest(RequestInfo info);
+        public Task<(IRequestHandler, ResponseInfo)> HandleRequest(RequestInfo info)
+        {
+            return null;
+        }
     }
 }
