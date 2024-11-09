@@ -14,13 +14,14 @@ namespace Aurora.Client.Communication
         private NetworkStream? _stream;
         private int CONNECTION_PORT = 1223;
         private string CONNECTION_IP = "127.0.0.1";
-        private int BUFFER_SIZE = 1024;
+        private readonly int HEADER_SIZE = 5;
 
         public static Communicator Instance
         {
             get
             {
                 _instance ??= new Communicator();
+                _instance.ConnectToServerAsync();
                 return _instance;
             }
         }
@@ -30,17 +31,28 @@ namespace Aurora.Client.Communication
             _client = new TcpClient();
         }
 
-        private async Task SendMessageToServer(string message)
+        public async Task SendMessageToServer(RequestInfo info)
         {
-            var dataToSend = Encoding.UTF8.GetBytes(message);
-            await _client.GetStream().WriteAsync(dataToSend);
+            var wholeMessage = new byte[HEADER_SIZE + info.message.Length];
+            wholeMessage[0] = (byte)info.code;
+            Array.Copy(BitConverter.GetBytes(info.message.Length), 0, wholeMessage, 1, 4);
+            Array.Copy(Encoding.UTF8.GetBytes(info.message), 0, wholeMessage, HEADER_SIZE, info.message.Length);
+            await _client.GetStream().WriteAsync(wholeMessage);
         }
 
-        private async Task<string> ReadMessageFromServer()
+        public async Task<ResponseInfo> ReadMessageFromServer()
         {
-            var buffer = new byte[BUFFER_SIZE];
-            var bytesRead = await _client.GetStream().ReadAsync(buffer, 0, buffer.Length);
-            return Encoding.UTF8.GetString(buffer, 0, bytesRead);
+            var stream = _client.GetStream();
+            var headerMessage = new byte[HEADER_SIZE];
+            await stream.ReadAsync(headerMessage, 0, HEADER_SIZE);
+            var messageSize = BitConverter.ToInt32(headerMessage, 1);
+            var wholeMessage = new byte[HEADER_SIZE + messageSize];
+            Array.Copy(headerMessage, wholeMessage, HEADER_SIZE);
+            await stream.ReadAsync(wholeMessage, HEADER_SIZE, messageSize);
+            ResponseInfo response;
+            response.message = Encoding.UTF8.GetString(wholeMessage, HEADER_SIZE, messageSize);
+            response.code = (ResponseCode)wholeMessage[0];
+            return response;
         }
 
 

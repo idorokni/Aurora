@@ -19,7 +19,7 @@ namespace Aurora.Server.Communication
         }
         public void RunServer()
         {
-            Task.Run(() => { _ = Communicator.Instance.AcceptClients(); });
+            Task.Run(() => { Communicator.Instance.AcceptClients(); });
             var code = Console.ReadLine();
             while(code is not "EXIT")
             {
