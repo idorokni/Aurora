@@ -12,7 +12,7 @@ using System.Windows.Data;
 
 namespace Aurora.Client.WpfApplication.MVVM.ViewModel
 {
-    class SignupViewModel : ObservableObject
+    internal class SignupViewModel : ObservableObject
     {
         private string _email = "";
         private string _username = "";

@@ -21,10 +21,17 @@
             <DataTemplate DataType="{x:Type viewModel:SignupViewModel}">
                 <view:SignupView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EditProfileViewModel}">
+                <view:EditProfileView/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/SubmitButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/LoginSignUpInputBoxTheme.xaml"/>
                 <ResourceDictionary Source="Theme/LoginTitleText.xaml"/>
+                <ResourceDictionary Source="Theme/HomeOptionButton.xaml"/>
+                <ResourceDictionary Source="Theme/MainOptionButton.xaml"/>
+                <ResourceDictionary Source="Theme/LowCorenerRadiusButton.xaml"/>
+                <ResourceDictionary Source="Theme/CircleButtonTheme.xaml"/>
                 <xf:XamlFlairResources/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
