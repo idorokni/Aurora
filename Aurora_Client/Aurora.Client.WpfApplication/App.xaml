@@ -5,6 +5,7 @@
              xmlns:view="clr-namespace:Aurora.Client.WpfApplication.MVVM.View"
              xmlns:viewModel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel"
              xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
+             xmlns:svg="c"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
