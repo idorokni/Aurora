@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Aurora.Client.Communication
 {
-    internal class TokenManager
+    public class TokenManager
     {
         private static TokenManager _instance;
         public static TokenManager Instance

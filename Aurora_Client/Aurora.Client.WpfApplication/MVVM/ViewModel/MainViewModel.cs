@@ -34,7 +34,7 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
             var responseInfo = await AuthenticationManagerAurora.Instance.TrySigninginToServerWithToken();
             if (responseInfo.code == ResponseCode.TOKEN_CONNECT_FAILED || string.IsNullOrEmpty(responseInfo.message))
             {
-                CurrentView = new SignupViewModel();
+                CurrentView = new LoginViewModel();
             }
             else
             {

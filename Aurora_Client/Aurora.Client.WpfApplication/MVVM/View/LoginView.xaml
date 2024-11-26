@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Aurora.Client.WpfApplication.MVVM.View"
-             mc:Ignorable="d" 
-             xmlns:xf = "clr-namespace:XamlFlair;assembly=XamlFlair.WPF" 
+             xmlns:app="clr-namespace:Aurora.Client.WpfApplication"
              xmlns:viewmodel="clr-namespace:Aurora.Client.WpfApplication.MVVM.ViewModel"
+             xmlns:userControls="clr-namespace:Aurora.Client.WpfApplication.UserControls"
+             mc:Ignorable="d" 
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF" 
              d:DataContext="{d:DesignInstance Type=viewmodel:LoginViewModel}"
              d:DesignHeight="500" d:DesignWidth="800">
     <Grid>
@@ -48,7 +50,7 @@
                         </Grid.ColumnDefinitions>
                         <Image Source="/Images/user-icon.png" Height="20" Grid.Column="0"/>
                         <TextBlock x:Name="textUsername" Text="Username" Style="{StaticResource txtHint}" Grid.Column="2" MouseDown="textUsername_MouseDown"/>
-                        <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" Grid.Column="2" BorderThickness="0"/>
+                        <TextBox x:Name="txtUsername" Grid.Column="2" BorderThickness="0" Text="{Binding Username}" LostFocus="txtUsername_LostFocus" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="#ACB0AF" Margin="70 7" CornerRadius="5">
@@ -60,10 +62,18 @@
                         </Grid.ColumnDefinitions>
                         <Image Source="/Images/lock-icon.png" Height="20" Grid.Column="0"/>
                         <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource txtHint}" Grid.Column="2" Margin="10,0,0,0"/>
-                        <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Grid.Column="2" BorderThickness="0" Margin="10, 0, 0, 0"/>
+                        <userControls:BindablePasswordBox Password="{Binding Password}" x:Name="txtPassword" Grid.Column="2" Margin="10 0 0 0" LostFocus="txtPassword_LostFocus" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
-                <Button Content="Sign in" Style="{StaticResource loginButton}"/>
+                <Button Content="Sign in" Style="{StaticResource loginButton}" Command="{Binding SubmitSigninCommand}"/>
+                <TextBlock Text="{Binding ErrorString}"
+                           Foreground="#F75F0C"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           TextAlignment="Center"
+                           Margin="0 20 0 0"
+                           Visibility="{Binding ErrorVisibility}"
+                           TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
     </Grid>

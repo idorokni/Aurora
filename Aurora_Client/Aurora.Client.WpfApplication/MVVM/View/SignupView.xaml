@@ -90,6 +90,16 @@
                     </Grid>
                 </Border>
                 <Button Content="Sign up" Style="{StaticResource loginButton}" Command="{Binding SubmitSignupCommand}"/>
+                <TextBlock Text="{Binding ErrorString}"
+                           Foreground="#F75F0C"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           TextAlignment="Center"
+                           Margin="0 20 0 0"
+                           Visibility="{Binding ErrorVisibility}"
+                           TextWrapping="Wrap"/>
+
+
             </StackPanel>
         </Border>
     </Grid>

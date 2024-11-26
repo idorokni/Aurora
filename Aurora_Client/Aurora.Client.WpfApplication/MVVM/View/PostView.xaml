@@ -121,8 +121,8 @@
 
                         <Border BorderThickness="0.7" BorderBrush="#E5E7EB" Margin="20 20 20 20" CornerRadius="5" Grid.Row="1">
                             <Grid>
-                                <TextBlock x:Name="textUsername" Text="Type a message..." Style="{StaticResource txtHint}" MouseDown="textUsername_MouseDown" VerticalAlignment="Center"/>
-                                <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" BorderThickness="2" Height="30"/>
+                                <TextBlock x:Name="textUsername" Text="Type a message..." Style="{StaticResource txtHint}" VerticalAlignment="Center"/>
+                                <TextBox x:Name="txtUsername" BorderThickness="2" Height="30"/>
                             </Grid>
                         </Border>
 

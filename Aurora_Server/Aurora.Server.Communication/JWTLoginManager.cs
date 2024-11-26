@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace Aurora.Server.Communication
                 return _instance;
             }
         }
-        public async Task<string?> JWTSignupAndSigninAsync(string username, string password, string email)
+        public async Task<string?> JWTSignupAsync(string username, string password, string email)
         {
             try
             {
@@ -27,7 +28,23 @@ namespace Aurora.Server.Communication
                 return null;
             }
         }
-        public async Task<LoggedUser> JWTloginAsync(string token)
+
+        public async Task<LoginReturnData> JWTLoginAsync(string username, string password)
+        {
+            try
+            {
+                var loginReturnData = new LoginReturnData();
+                loginReturnData.Email = DatabaseManager.Instance.FindEmail(username);
+                loginReturnData.Token = await JWTService.GenerateTokenAsync(username, password, loginReturnData.Email);
+
+                return loginReturnData;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public async Task<LoggedUser> JWTConnectAsync(string token)
         {
             return await JWTService.ValidateTokenAsync(token);
         }
