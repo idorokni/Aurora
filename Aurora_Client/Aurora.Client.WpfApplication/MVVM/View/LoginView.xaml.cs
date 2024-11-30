@@ -27,33 +27,27 @@ namespace Aurora.Client.WpfApplication.MVVM.View
 
         private void textUsername_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtUsername.Focus(); 
+            txtUsername.Focus();
+            textUsername.Visibility = Visibility.Collapsed;
         }
 
-        private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtUsername_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtUsername.Text) && txtUsername.Text.Length > 0)
-            {
-                textUsername.Visibility = Visibility.Collapsed;
-            }
-            else
+            if (txtUsername.Text == string.Empty)
             {
                 textUsername.Visibility = Visibility.Visible;
             }
         }
-        
+
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtPassword.Focus(); 
+            txtPassword.FocusPasswordBox();
+            textPassword.Visibility = Visibility.Collapsed;
         }
 
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void txtPassword_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtPassword.Password) && txtPassword.Password.Length > 0)
-            {
-                textPassword.Visibility = Visibility.Collapsed;
-            }
-            else
+            if (txtPassword.passwordBox.Password == string.Empty)
             {
                 textPassword.Visibility = Visibility.Visible;
             }

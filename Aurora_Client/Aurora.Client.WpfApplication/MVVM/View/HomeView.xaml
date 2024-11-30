@@ -58,6 +58,36 @@
                         <Button Style="{StaticResource HomeButtonOptionStyle}" 
                                 Height="30"
                                 Margin="0 6 0 0"
+                                Command="{Binding SwitchToCreateNewPost}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4*"/>
+                                </Grid.ColumnDefinitions>
+                                <Canvas Width="24" Height="24">
+                                    <!-- Horizontal line -->
+                                    <Path Data="M5,12 H19" 
+                                          Stroke="#ACB0AF" 
+                                          StrokeThickness="2"
+                                          StrokeLineJoin="Round" />
+                                    <Path Data="M12,5 V19" 
+                                          Stroke="#ACB0AF" 
+                                          StrokeThickness="2"
+                                          StrokeLineJoin="Round" />
+                                </Canvas>
+                                <TextBlock Grid.Column="1"
+                                           Text="Add Post"
+                                           Foreground="#ACB0AF"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           FontSize="15"
+                                           FontWeight="Light"
+                                           Margin="4"/>
+                            </Grid>
+                        </Button>
+                        <Button Style="{StaticResource HomeButtonOptionStyle}" 
+                                Height="30"
+                                Margin="0 6 0 0"
                                 Command="{Binding SwitchToChangeProfile}">
                             <Grid>
                                 <Grid.ColumnDefinitions>

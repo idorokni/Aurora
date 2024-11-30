@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace Aurora.Client.WpfApplication.MVVM.ViewModel
@@ -19,12 +20,14 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
         private string _errorString = "";
         private string _password = "";
         private string _confirmPassword = "";
+        private Visibility _errorVisibility = Visibility.Collapsed;  
 
         public string Email { get { return _email; } set { _email = value; OnPropertyChanged(); } }
         public string Username { get { return _username; } set { _username = value; OnPropertyChanged(); } }
         public string ErrorString { get { return _errorString; } set { _errorString = value; OnPropertyChanged(); } }
         public string Password { get { return _password; } set { _password = value; OnPropertyChanged(); } }
         public string ConfirmPassword { get { return _confirmPassword; } set { _confirmPassword = value; OnPropertyChanged(); } }
+        public Visibility ErrorVisibility { get { return _errorVisibility; } set {  _errorVisibility = value; OnPropertyChanged(); } }
 
         public RelayCommand SubmitSignupCommand { get; set; }
         public RelayCommand SwitchToSignin { get; set; }
@@ -37,6 +40,7 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
                 if(serverResponse.code == ResponseCode.TOKEN_SIGNUP_FAILED)
                 {
                     ErrorString = serverResponse.message;
+                    ErrorVisibility = Visibility.Visible;
                 }
                 else
                 {

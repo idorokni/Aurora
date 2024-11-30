@@ -21,10 +21,13 @@ namespace Aurora.Server.Communication
         private static readonly int BYTES_LENGTH = 4;
         private static readonly int HEADER_SIZE = CODE_AMOUNT_BYTES + BYTES_LENGTH;
 
+        public List<LoggedUser> LoggedUsers { get { return _loggedUsers; } }
+
         public Communicator()
         {
             _clients = new Dictionary<TcpClient, IRequestHandler>();
             _server = new TcpListener(IPAddress.Any, SERVER_LISTEN_PORT);
+            _loggedUsers = new List<LoggedUser>();
             _server.Start();
         }
 

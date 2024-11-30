@@ -9,12 +9,12 @@ namespace Aurora.Server.Communication
     public class LoggedUser
     {
         private string _username;
-        private string _password;
+        private string _email;
 
-        public LoggedUser(string username, string password)
+        public LoggedUser(string username, string email)
         {
             _username = username;
-            _password = password;
+            _email = email;
         }
 
         public string Username
@@ -25,8 +25,8 @@ namespace Aurora.Server.Communication
 
         public string Email
         {
-            get { return _password; }
-            set { _password = value; }
+            get { return _email; }
+            set { _email = value; }
         }
     }
 }

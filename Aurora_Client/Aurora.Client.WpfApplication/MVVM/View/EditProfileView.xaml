@@ -8,8 +8,8 @@
              xmlns:usercontrols="clr-namespace:Aurora.Client.WpfApplication.UserControls"
              d:DataContext="{d:DesignInstance Type=viewmodel:EditProfileViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Border CornerRadius="30"
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Border CornerRadius="15"
         Background="White">
         <Grid>
             <Grid.RowDefinitions>
@@ -45,11 +45,17 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Ellipse Height="160" Width="160">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Images/default_user_image.png"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
+                    <Border Width="160" 
+                            Height="160"
+                            CornerRadius="25"
+                            Margin="0 10 0 0"
+                            SnapsToDevicePixels="True"
+                            RenderOptions.BitmapScalingMode="Fant"> 
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/default_user_image.png" 
+                                        Stretch="UniformToFill"/>
+                        </Border.Background>
+                    </Border>
 
                     <Button Style="{StaticResource CircleButtonTheme}"
                         Width="50"
@@ -57,10 +63,12 @@
                         Background="#14B8A6"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        Margin="0 0 30 20">
-                        <Image Source="/Images/camera.png"
-                           Width="30"
-                           Height="30"/>
+                        Margin="0 0 30 20"
+                        BorderThickness="0">
+                        <Canvas Width="24" Height="24">
+                            <Path Data="M14.5,4 H9.5 L7,7 H4 C2.89543,7 2,7.89543 2,9 V18 C2,19.1046 2.89543,20 4,20 H20 C21.1046,20 22,19.1046 22,18 V9 C22,7.89543 21.1046,7 20,7 H17 L14.5,4 Z" Stroke="White" StrokeThickness="2" StrokeLineJoin="Round"/>
+                            <Ellipse Canvas.Left="7.5" Canvas.Top="8" Width="9" Height="9" Stroke="White" StrokeThickness="2"/>
+                        </Canvas>
                     </Button>
 
                     <StackPanel Grid.Row="1" Margin="15 0 0 0"
