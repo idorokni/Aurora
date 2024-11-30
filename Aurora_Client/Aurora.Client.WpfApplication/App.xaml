@@ -25,6 +25,9 @@
             <DataTemplate DataType="{x:Type viewModel:EditProfileViewModel}">
                 <view:EditProfileView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:CreateNewPostViewModel}">
+                <view:CreateNewPostView/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/SubmitButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/LoginSignUpInputBoxTheme.xaml"/>

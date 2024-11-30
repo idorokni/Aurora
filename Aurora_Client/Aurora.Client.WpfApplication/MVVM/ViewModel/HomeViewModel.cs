@@ -17,6 +17,7 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
         public string Email { get => _email ; set { _email = value; OnPropertyChanged(); } }
 
         public RelayCommand SwitchToChangeProfile { get; set; }
+        public RelayCommand SwitchToCreateNewPost { get; set; }
 
         public HomeViewModel(LoggedUser user)
         {
@@ -25,6 +26,11 @@ namespace Aurora.Client.WpfApplication.MVVM.ViewModel
             SwitchToChangeProfile = new RelayCommand(o =>
             {
                 MainViewModel.Instance.CurrentView = new EditProfileViewModel();
+            });
+
+            SwitchToCreateNewPost = new RelayCommand(o =>
+            {
+                MainViewModel.Instance.CurrentView = new CreateNewPostViewModel();
             });
         }
     }
